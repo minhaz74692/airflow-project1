@@ -22,7 +22,7 @@ def xcoms_manaual_kwargs_dag():
         print("Transforming data from kwargs ==> Task 2 executed")
 
         #pulling data from XCom using the task instance
-        fetched_data = ti.xcom_pull(key='return_result', task_ids='extract')
+        fetched_data = ti.xcom_pull(task_ids='extract')
 
         transformed_data = [x * 2 for x in fetched_data["data"]]
         transformed_data_dict = {"transformed_data": transformed_data}
@@ -32,7 +32,7 @@ def xcoms_manaual_kwargs_dag():
     def load(**kwargs):
         ti = kwargs['ti']
         print("Loading data from kwargs ==> Task 3 executed")
-        load_data = ti.xcom_pull(key='return_result', task_ids='transform')
+        load_data = ti.xcom_pull(task_ids='transform')
         
         ti.xcom_push(key='return_result', value=load_data)
     
