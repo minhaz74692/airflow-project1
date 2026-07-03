@@ -9,3 +9,7 @@ wheels/
 # Virtual environments
 .venv
 logs/
+
+# Secrets
+.env
+config/airflow.cfg
